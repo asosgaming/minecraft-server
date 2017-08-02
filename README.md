@@ -1,6 +1,6 @@
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/itzg/minecraft-server.svg)](https://hub.docker.com/r/itzg/minecraft-server/)
-[![Docker Stars](https://img.shields.io/docker/stars/itzg/minecraft-server.svg?maxAge=2592000)](https://hub.docker.com/r/itzg/minecraft-server/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/asos/minecraft-server.svg)](https://hub.docker.com/r/asos/minecraft-server/)
+[![Docker Stars](https://img.shields.io/docker/stars/asos/minecraft-server.svg?maxAge=2592000)](https://hub.docker.com/r/asos/minecraft-server/)
 
 This docker image provides a Minecraft Server that will automatically download the latest stable
 version at startup. You can also run/upgrade to any specific version or the
@@ -8,7 +8,7 @@ latest snapshot. See the *Versions* section below for more information.
 
 To simply use the latest stable version, run
 
-    docker run -d -p 25565:25565 --name mc itzg/minecraft-server
+    docker run -d -p 25565:25565 --name mc asos/minecraft-server
 
 where the standard server port, 25565, will be exposed on your host machine.
 
@@ -22,7 +22,7 @@ will serve your Minecraft server on your host's port 25566 since the `-p` syntax
 
 Speaking of multiple servers, it's handy to give your containers explicit names using `--name`, such as
 
-    docker run -d -p 25565:25565 --name mc itzg/minecraft-server
+    docker run -d -p 25565:25565 --name mc asos/minecraft-server
 
 With that you can easily view the logs, stop, or re-start the container:
 
@@ -55,7 +55,7 @@ _The `-i` is not needed in this case._
 
 In order to attach and interact with the Minecraft server, add `-it` when starting the container, such as
 
-    docker run -d -it -p 25565:25565 --name mc itzg/minecraft-server
+    docker run -d -it -p 25565:25565 --name mc asos/minecraft-server
 
 With that you can attach and interact at any time using
 
@@ -78,7 +78,7 @@ Mojang now requires accepting the [Minecraft EULA](https://account.mojang.com/do
 
 such as
 
-        docker run -d -it -e EULA=TRUE -p 25565:25565 --name mc itzg/minecraft-server
+        docker run -d -it -e EULA=TRUE -p 25565:25565 --name mc asos/minecraft-server
 
 ## Attaching data directory to host filesystem
 
@@ -153,7 +153,7 @@ but you can also choose to run a specific version with `-e FORGEVERSION=10.13.4.
 
     $ docker run -d -v /path/on/host:/data -e VERSION=1.7.10 \
         -e TYPE=FORGE -e FORGEVERSION=10.13.4.1448 \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 25565:25565 -e EULA=TRUE --name mc asos/minecraft-server
 
 To use a pre-downloaded Forge installer, place it in the attached `/data` directory and
 specify the name of the installer file with `FORGE_INSTALLER`, such as:
@@ -217,7 +217,7 @@ Enable Bukkit/Spigot server mode by adding a `-e TYPE=BUKKIT -e VERSION=1.8` or 
 
     docker run -d -v /path/on/host:/data \
         -e TYPE=SPIGOT -e VERSION=1.8 \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 25565:25565 -e EULA=TRUE --name mc asos/minecraft-server
 
 If you are hosting your own copy of Bukkit/Spigot you can override the download URLs with:
 * -e BUKKIT_DOWNLOAD_URL=<url>
@@ -230,7 +230,7 @@ pass `--noconsole` at the very end of the command line and not use `-it`. For ex
 
     docker run -d -v /path/on/host:/data \
         -e TYPE=SPIGOT -e VERSION=1.8 \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server --noconsole
+        -p 25565:25565 -e EULA=TRUE --name mc asos/minecraft-server --noconsole
 
 
 You can install Bukkit plugins in two ways...
@@ -279,14 +279,14 @@ Enable PaperSpigot server mode by adding a `-e TYPE=PAPER -e VERSION=1.9.4` to y
 
     docker run -d -v /path/on/host:/data \
         -e TYPE=PAPER -e VERSION=1.9.4 \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 25565:25565 -e EULA=TRUE --name mc asos/minecraft-server
 
 __NOTE: to avoid pegging the CPU when running PaperSpigot,__ you will need to
 pass `--noconsole` at the very end of the command line and not use `-it`. For example,
 
     docker run -d -v /path/on/host:/data \
         -e TYPE=PAPER -e VERSION=1.9.4 \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server --noconsole
+        -p 25565:25565 -e EULA=TRUE --name mc asos/minecraft-server --noconsole
 
 If you are hosting your own copy of PaperSpigot you can override the download URL with:
 * -e PAPER_DOWNLOAD_URL=<url>
@@ -347,7 +347,7 @@ Now you can add a `-e FTB_SERVER_MOD=name_of_modpack.zip` to your command-line.
 
     $ docker run -d -v /path/on/host:/data -e TYPE=FTB \
         -e FTB_SERVER_MOD=FTBPresentsSkyfactory3Server_3.0.6.zip \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 25565:25565 -e EULA=TRUE --name mc asos/minecraft-server
 
 Instead of explicitly downloading a modpack from the Feed the Beast site, you
 can you set `FTB_SERVER_MOD` to the **server** URL of a modpack, such as
@@ -376,7 +376,7 @@ with `FTB_SERVER_MOD` specifying the updated modpack file.
 
     $ docker run -d -v /path/on/host:/data -e TYPE=FTB \
         -e FTB_SERVER_MOD=FTBPresentsSkyfactory3Server_3.0.7.zip \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 25565:25565 -e EULA=TRUE --name mc asos/minecraft-server
 
 ### FTB server JVM options
 
@@ -392,7 +392,7 @@ example:
     $ docker run -d -v /path/on/host:/data -e TYPE=FTB \
         -e MIN_RAM=1G -e MAX_RAM=2G -e PERMGEN_SIZE=512M \
         -e FTB_SERVER_MOD=FTBPresentsSkyfactory3Server_3.0.6.zip \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 25565:25565 -e EULA=TRUE --name mc asos/minecraft-server
 
 Note: The FTB server start script will also override other options,
 like `MOTD`.
@@ -412,7 +412,7 @@ minecraft-server:
   environment:
     EULA: "TRUE"
 
-  image: itzg/minecraft-server
+  image: asos/minecraft-server
 
   container_name: mc
 
@@ -683,7 +683,7 @@ To use this option pass the environment variable `REMOVE_OLD_MODS="TRUE"`, such 
 
 **NOTE:** This option will be taken into account only when option `MODPACK` is also used.
 
-**WARNING:** All content of the `mods` or `plugins` directory will be deleted 
+**WARNING:** All content of the `mods` or `plugins` directory will be deleted
 before unpacking new content from the zip file.
 
 ### Online mode

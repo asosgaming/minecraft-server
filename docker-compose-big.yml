@@ -5,7 +5,7 @@ services:
     ports:
       - "25565:25565"
     volumes:
-      - "mcbig:/data"
+      - "storage/minecraft:/data"
     environment:
       EULA: "TRUE"
       MAX_MEMORY: 32G
@@ -14,10 +14,10 @@ services:
       LEVEL_TYPE: LARGEBIOMES
       MAX_PLAYERS: 100
       CONSOLE: "false"
-    image: itzg/minecraft-server
+    image: asos/minecraft-server
     restart: always
   rcon:
-    image: itzg/rcon
+    image: asos/rcon
     ports:
       - "4326:4326"
       - "4327:4327"
@@ -25,5 +25,5 @@ services:
       - "rcon:/opt/rcon-web-admin/db"
 
 volumes:
-  mcbig:
+  storage/minecraft:
   rcon:
